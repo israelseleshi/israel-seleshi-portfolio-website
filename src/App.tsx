@@ -1069,7 +1069,7 @@ function App() {
             <div className={`mb-4 sm:mb-0 transition-colors duration-300 ${
               isDarkMode ? 'text-gray-400' : 'text-gray-600'
             }`}>
-              &copy; 2024 Israel Seleshi. All rights reserved.
+              &copy; {new Date().getFullYear()} Israel Seleshi. All rights reserved.
             </div>
             <div className="flex space-x-4">
               <motion.a 

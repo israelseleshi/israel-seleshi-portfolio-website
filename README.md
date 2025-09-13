@@ -8,7 +8,7 @@
 <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
 <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion" />
 
-### 🎯 **Premium Portfolio Experience** | 🚀 **Modern Web Development** | 💡 **Data Science Enthusiast**
+### 🎯 **Portfolio Experience** | 🚀 **Modern Web Development** | 💡 **Data Science Enthusiast**
 
 *A sophisticated, responsive portfolio showcasing expertise in Information Systems and Data Analytics*
 
@@ -18,7 +18,7 @@
 
 ## 🎨 **Design Philosophy**
 
-This portfolio embodies **premium craftsmanship** with a focus on:
+This portfolio embodies **excellent craftsmanship** with a focus on:
 - ✨ **Elegant Animations** - Smooth, purposeful motion design
 - 🌙 **Adaptive Theming** - Seamless dark/light mode transitions  
 - 📱 **Responsive Excellence** - Flawless experience across all devices
