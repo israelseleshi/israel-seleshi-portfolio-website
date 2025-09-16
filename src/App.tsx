@@ -7,9 +7,6 @@ import {
   Github, 
   Linkedin, 
   Mail, 
-  Code, 
-  Database, 
-  Globe, 
   GraduationCap,
   Award,
   Users,
@@ -27,7 +24,6 @@ import {
   Target,
   Star,
   Download,
-  ChevronDown,
   ArrowRight,
   Sun,
   Moon
@@ -185,9 +181,16 @@ function App() {
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
+    <div className={`min-h-screen transition-colors duration-300 relative overflow-hidden ${
       isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
     }`}>
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, ${isDarkMode ? 'rgba(16, 185, 129, 0.5)' : 'rgba(16, 185, 129, 0.3)'} 1px, transparent 0)`,
+          backgroundSize: '40px 40px'
+        }}></div>
+      </div>
       {/* Navigation */}
       <motion.nav 
         className={`fixed top-0 left-0 right-0 backdrop-blur-md border-b z-50 transition-colors duration-300 ${
@@ -437,37 +440,42 @@ function App() {
                 Information Systems Student & Aspiring Data Scientist
               </motion.h2>
               
-              <motion.p 
-                className={`text-lg leading-relaxed mb-8 max-w-2xl transition-colors duration-300 ${
+              <p 
+                className={`text-lg leading-relaxed transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}
-                variants={itemVariants}
               >
-                Passionate about data analytics and web development with hands-on experience in full-stack development. 
-                Currently pursuing my Bachelor's degree while building innovative solutions and exploring the world of data science.
-              </motion.p>
+                Passionate about <span className="text-green-500">data analytics</span> and <span className="text-green-500">web development</span> with <span className="border-b-2 border-green-500">hands-on experience</span> in <span className="text-green-500">full-stack development</span>. 
+                Currently pursuing my Bachelor's degree while <span className="border-b-2 border-green-500">building</span> <span className="text-green-500">innovative solutions</span> and <span className="border-b-2 border-green-500">exploring the world of data science</span>.
+              </p>
               
               <motion.div 
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8"
                 variants={itemVariants}
               >
                 <motion.button
                   onClick={() => scrollToSection('portfolio')}
-                  className="group px-8 py-3 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="group px-8 py-3 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center gap-2 relative"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  View My Work
+                  <span className="relative">
+                    View My Work
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </span>
                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                 </motion.button>
                 <motion.button 
                   onClick={() => window.open('https://drive.google.com/file/d/1vAomA8a8pZtk5ggSrUtqV3ByT8MhUnXq/view?usp=sharing', '_blank')}
-                  className="group px-8 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="group px-8 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 relative"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Download size={16} />
-                  Download Resume
+                  <span className="relative">
+                    Download Resume
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
+                  </span>
                 </motion.button>
               </motion.div>
 
@@ -484,7 +492,7 @@ function App() {
                 <div className={`flex items-center gap-2 transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-600'
                 }`}>
-                  <GraduationCap size={16} />
+                  <img src="/aauLogo.png" alt="Addis Ababa University Logo" className="w-4 h-4" />
                   <span className="text-sm">AAU Student</span>
                 </div>
               </motion.div>
@@ -499,25 +507,13 @@ function App() {
               <motion.img
                 src="/profile.png"
                 alt="Israel Seleshi - Professional headshot"
-                className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover object-center rounded-t-full"
-                style={{
-                  clipPath: "ellipse(50% 45% at 50% 50%)"
-                }}
+                className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain object-center rounded-full"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               />
             </motion.div>
           </motion.div>
 
-          <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ChevronDown size={24} className={`transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-400'
-            }`} />
-          </motion.div>
         </div>
       </section>
 
@@ -547,19 +543,20 @@ function App() {
               <p className={`text-lg leading-relaxed mb-6 transition-colors duration-300 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
-                I'm an Information Systems student at Addis Ababa University with a passion for data analytics 
-                and web development. With 2 months of internship experience at EthSwitch S.C., I've gained 
+                I'm an <strong className="font-bold text-green-500">Information Systems Student</strong> at Addis Ababa University with a passion for <span className="font-bold text-green-500">data analytics</span> 
+                and <span className="font-bold text-green-500">web development</span>. With <span className="font-bold border-b-2 border-green-500">hands-on experience</span> at EthSwitch S.C., I've gained 
                 valuable insights into the tech industry and developed strong technical skills.
               </p>
+              
               <p className={`text-lg leading-relaxed mb-8 transition-colors duration-300 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
-                My expertise spans across data analysis, full-stack web development, and database management. 
+                My expertise spans across <span className="font-bold text-green-500">data analytics</span>, <span className="font-bold text-green-500">full-stack development</span>, and database management. 
                 I'm fluent in both Amharic and English, with strong communication, problem-solving, and teamwork abilities. 
-                I'm eager to pursue a career in data analytics or data science.
+                I'm eager to pursue a career as an <strong className="font-bold text-green-500">Aspiring Data Scientist</strong>.
               </p>
               
-              <div className="grid grid-cols-2 gap-6 mb-8">
+              <div className="grid grid-cols-2 gap-6 mb-8 mt-6">
                 <motion.div 
                   className={`text-center p-4 rounded-lg transition-colors duration-300 ${
                     isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
@@ -608,24 +605,25 @@ function App() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               {/* Education Cards */}
+            <div className="space-y-6">
               {education.map((edu, index) => (
                 <motion.div
                   key={index}
                   className={`p-6 rounded-xl transition-colors duration-300 ${
                     isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-gray-50'
                   }`}
-                  whileHover={{ 
-                    scale: 1.02, 
-                    backgroundColor: isDarkMode ? "#065f46" : "#f0fdf4",
-                    borderColor: isDarkMode ? "#10b981" : "#d1d5db"
-                  }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 transition-colors duration-300 ${
-                      isDarkMode ? 'bg-green-900/30' : 'bg-green-100'
-                    }`}>
-                      <GraduationCap size={20} className="text-green-600" />
+                    <div className="w-10 h-10 flex-shrink-0 mt-1">
+                      {edu.institution === "Saint Joseph High School" ? (
+                        <img src="/stJospeghSchoolLogo-background removed.png" alt="Saint Joseph High School Logo" className="w-full h-full object-contain" />
+                      ) : (
+                        <img src="/aauLogo.png" alt="Addis Ababa University Logo" className="w-full h-full object-contain" />
+                      )}
                     </div>
                     <div className="flex-1">
                       <h3 className={`font-semibold mb-1 transition-colors duration-300 ${
@@ -671,42 +669,42 @@ function App() {
                   </div>
                 </motion.div>
               ))}
+            </div>
 
               {/* Volunteering Experience */}
-              <motion.div
-                className={`p-6 rounded-xl transition-colors duration-300 ${
-                  isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-gray-50'
-                }`}
-                whileHover={{ 
-                  scale: 1.02, 
-                  backgroundColor: isDarkMode ? "#065f46" : "#f0fdf4",
-                  borderColor: isDarkMode ? "#10b981" : "#d1d5db"
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1 transition-colors duration-300 ${
-                    isDarkMode ? 'bg-green-900/30' : 'bg-green-100'
-                  }`}>
-                    <Heart size={20} className="text-green-600" />
-                  </div>
-                  <div>
-                    <h3 className={`font-semibold mb-1 transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Academic Tutor</h3>
-                    <p className="text-green-600 font-medium mb-2">Askal Charity Association</p>
-                    <p className={`text-sm mb-3 transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                    }`}>June 2021 - August 2021</p>
-                    <p className={`text-sm transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>
-                      Provided tutoring to 30+ students, achieving 20% average improvement in test scores 
-                      through engaging lesson plans and mentorship.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+          <motion.div
+            className={`p-6 rounded-xl transition-colors duration-300 ${
+              isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-gray-50'
+            }`}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 flex-shrink-0 mt-1">
+                <Heart size={20} className="text-green-600" />
+              </div>
+              <div>
+                <h3 className={`font-semibold mb-1 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>Academic Tutor</h3>
+                <p className="text-green-600 font-medium mb-2">Askal Charity Association</p>
+                <p className={`text-sm mb-3 transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  <Calendar size={14} className="inline mr-1" />
+                  June 2021 - August 2021
+                </p>
+                <p className={`text-sm transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>
+                  Provided tutoring to 30+ students, achieving 20% average improvement in test scores 
+                  through engaging lesson plans and mentorship.
+                </p>
+              </div>
+            </div>
+          </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -732,7 +730,7 @@ function App() {
             <p className={`text-lg max-w-2xl mx-auto transition-colors duration-300 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              A showcase of my recent work in web development, data analytics, and design projects.
+              A showcase of my recent work in <span className="font-bold">web development</span>, <span className="font-bold">data analytics</span>, and design projects.
             </p>
           </motion.div>
 
@@ -747,7 +745,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -10, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
               >
                 <div className="aspect-video overflow-hidden relative">
                   <motion.img
@@ -766,7 +764,7 @@ function App() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className={`text-xl font-semibold mb-2 group-hover:text-green-600 transition-colors ${
+                  <h3 className={`text-xl font-bold mb-2 group-hover:text-green-600 transition-colors ${
                     isDarkMode ? 'text-white' : 'text-gray-900'
                   }`}>
                     {project.title}
@@ -778,10 +776,10 @@ function App() {
                     {project.technologies.map((tech) => (
                       <motion.span
                         key={tech}
-                        className={`px-3 py-1 text-xs rounded-full transition-colors duration-300 ${
+                        className={`px-3 py-1 text-xs rounded-full transition-all duration-300 border-b-2 border-transparent ${
                           isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
                         }`}
-                        whileHover={{ scale: 1.1, backgroundColor: "#dcfce7" }}
+                        whileHover={{ scale: 1.1, backgroundColor: "#dcfce7", borderColor: "#10b981" }}
                       >
                         {tech}
                       </motion.span>
@@ -822,7 +820,7 @@ function App() {
             <p className={`text-lg max-w-2xl mx-auto transition-colors duration-300 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              A comprehensive toolkit spanning programming, data analysis, and design.
+              A <span className="font-bold">comprehensive toolkit</span> spanning <span className="font-bold">programming</span>, <span className="font-bold">data analysis</span>, and <span className="font-bold">design</span>.
             </p>
           </motion.div>
 
@@ -830,18 +828,22 @@ function App() {
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 group ${
                   isDarkMode 
                     ? 'bg-gray-800 hover:bg-gray-700' 
-                    : 'bg-white'
+                    : 'bg-white hover:bg-green-50'
                 }`}
                 initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 100
+                }}
                 whileHover={{ scale: 1.05, y: -2 }}
               >
-                <img 
+                <motion.img 
                   src={skill.logo}
                   alt={skill.name}
                   className="w-6 h-6 flex-shrink-0"
@@ -849,10 +851,16 @@ function App() {
                     // Fallback to a generic tech icon if the specific logo fails
                     e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310b981'%3E%3Cpath d='M12 2L2 7L12 12L22 7L12 2Z'/%3E%3Cpath d='M2 17L12 22L22 17'/%3E%3Cpath d='M2 12L12 17L22 12'/%3E%3C/svg%3E";
                   }}
+                  whileHover={{ rotate: 10 }}
                 />
-                <span className={`text-sm font-semibold transition-colors duration-300 ${
-                  isDarkMode ? 'text-gray-200' : 'text-gray-800'
-                }`}>{skill.name}</span>
+                <motion.span 
+                  className={`text-sm font-semibold transition-colors duration-300 group-hover:text-green-500 ${
+                    isDarkMode ? 'text-gray-200' : 'text-gray-800'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {skill.name}
+                </motion.span>
               </motion.div>
             ))}
           </div>
@@ -871,15 +879,29 @@ function App() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>
+            <motion.h2 
+              className={`text-3xl sm:text-4xl font-bold mb-4 transition-colors duration-300 ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}
+              animate={{
+                textShadow: [
+                  "0 0 0px rgba(16, 185, 129, 0)",
+                  "0 0 10px rgba(16, 185, 129, 0.5)",
+                  "0 0 0px rgba(16, 185, 129, 0)"
+                ]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            >
               Let's Work Together
-            </h2>
+            </motion.h2>
             <p className={`text-lg transition-colors duration-300 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Ready to collaborate on your next project? Let's discuss your vision.
+              Ready to collaborate on your next <span className="font-bold">innovative solution</span>? Let's discuss your vision.
             </p>
           </motion.div>
 
