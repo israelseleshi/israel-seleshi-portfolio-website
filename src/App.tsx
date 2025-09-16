@@ -118,7 +118,8 @@ function App() {
       description: "Full-stack website development handling both front-end and back-end to create a comprehensive digital presence for an ICT solutions company.",
       image: "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=800",
       technologies: ["React", "Node.js", "JavaScript", "CSS"],
-      link: "#",
+      link: "https://nanocomputingict.netlify.app",
+      github: "https://github.com/israelseleshi/nanocomputingict-",
       category: "Web Development"
     },
     {
@@ -133,12 +134,13 @@ function App() {
     },
     {
       id: 3,
-      title: "Mobile App Concept",
-      description: "UI/UX design and concept development for a mobile application targeting local business needs with modern interface design.",
-      image: "https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["Figma", "UI/UX Design", "Prototyping"],
-      link: "#",
-      category: "Design"
+      title: "United Global Services - Visa & Immigration Platform",
+      description: "A comprehensive, platform for visa and immigration services. Built with modern web technologies and designed for enterprise-grade user experience with real-time messaging, and secure document management.",
+      image: "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Cloudinary", "Framer Motion"],
+      link: "https://ugsdesk.netlify.app",
+      github: "https://github.com/israelseleshi/UGS-website",
+      category: "Web Development"
     }
   ];
 
@@ -953,90 +955,162 @@ function App() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className={`py-16 sm:py-20 transition-colors duration-300 ${
+      <section id="portfolio" className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 relative overflow-hidden ${
         isDarkMode ? 'bg-gray-800' : 'bg-gray-50'
       }`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Gradient Background */}
+        <div className={`absolute inset-0 ${
+          isDarkMode 
+            ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900' 
+            : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+        }`}></div>
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className={`text-3xl sm:text-4xl font-bold mb-4 transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
+            <motion.div
+              className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+                isDarkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-50 text-green-700'
+              }`}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              My Work
+            </motion.div>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 transition-colors duration-300 bg-gradient-to-r ${
+              isDarkMode 
+                ? 'from-white via-gray-100 to-green-400 bg-clip-text text-transparent' 
+                : 'from-gray-900 via-gray-800 to-green-600 bg-clip-text text-transparent'
             }`}>
               Featured Projects
             </h2>
-            <p className={`text-lg max-w-2xl mx-auto transition-colors duration-300 ${
+            <p className={`text-base sm:text-lg max-w-2xl mx-auto transition-colors duration-300 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>
               A showcase of my recent work in <span className="font-bold">web development</span>, <span className="font-bold">data analytics</span>, and design projects.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                className={`group rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 ${
-                  isDarkMode ? 'bg-gray-800' : 'bg-white'
+                className={`group rounded-2xl overflow-hidden backdrop-blur-sm border-2 transition-all duration-500 cursor-pointer ${
+                  isDarkMode 
+                    ? 'bg-gradient-to-br from-gray-800/60 to-gray-900/60 border-gray-700/50 hover:border-green-500/50 hover:bg-gray-700/80' 
+                    : 'bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/50 hover:border-green-400/50 hover:bg-white/90'
                 }`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -10, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ 
+                  y: -12, 
+                  scale: 1.02,
+                  rotateY: 2,
+                  transition: { duration: 0.3 }
+                }}
+                whileTap={{ scale: 0.98 }}
               >
-                <div className="aspect-video overflow-hidden relative">
+                <div className="aspect-video overflow-hidden relative rounded-t-2xl">
                   <motion.img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.6 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4">
-                      <span className="px-3 py-1 bg-white/90 text-gray-800 text-xs rounded-full font-medium">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute top-4 right-4">
+                      <motion.span 
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                          isDarkMode ? 'bg-green-900/80 text-green-300' : 'bg-green-100/90 text-green-700'
+                        }`}
+                        initial={{ scale: 0, rotate: -10 }}
+                        whileInView={{ scale: 1, rotate: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.1 + 0.3 }}
+                      >
                         {project.category}
-                      </span>
+                      </motion.span>
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className={`text-xl font-bold mb-2 group-hover:text-green-600 transition-colors ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>
-                  {project.title}
-                </h3>
-                  <p className={`mb-4 leading-relaxed transition-colors duration-300 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
-              }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech) => (
+                <div className="p-4 sm:p-6">
+                  <h3 className={`text-lg sm:text-xl font-bold mb-2 sm:mb-3 group-hover:text-green-500 transition-colors line-clamp-2 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>
+                    {project.title}
+                  </h3>
+                  <p className={`mb-4 text-sm sm:text-base leading-relaxed transition-colors duration-300 line-clamp-3 ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>
+                    {project.description}
+                  </p>
+                  
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
+                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
                       <motion.span
                         key={tech}
-                        className={`px-3 py-1 text-xs rounded-full transition-all duration-300 border-b-2 border-transparent ${
-                          isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                        className={`px-2 sm:px-3 py-1 text-xs rounded-full transition-all duration-300 ${
+                          isDarkMode 
+                            ? 'bg-gray-700/50 text-gray-300 hover:bg-green-900/30 hover:text-green-400' 
+                            : 'bg-gray-100/50 text-gray-700 hover:bg-green-100/50 hover:text-green-600'
                         }`}
-                        whileHover={{ scale: 1.1, backgroundColor: "#dcfce7", borderColor: "#10b981" }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 + techIndex * 0.05 }}
+                        whileHover={{ scale: 1.05 }}
                         style={{ userSelect: 'text', pointerEvents: 'auto' }}
                       >
                         {tech}
                       </motion.span>
                     ))}
+                    {project.technologies.length > 4 && (
+                      <span className={`px-2 sm:px-3 py-1 text-xs rounded-full ${
+                        isDarkMode ? 'bg-gray-700/50 text-gray-400' : 'bg-gray-100/50 text-gray-500'
+                      }`}>
+                        +{project.technologies.length - 4}
+                      </span>
+                    )}
                   </div>
+                  
+                  {/* Project Link */}
                   <motion.a
                     href={project.link}
-                    className="inline-flex items-center gap-2 text-green-500 font-medium hover:text-green-600 transition-colors group"
-                    whileHover={{ x: 5 }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`inline-flex items-center gap-2 font-semibold text-sm sm:text-base transition-all duration-300 group/link ${
+                      isDarkMode 
+                        ? 'text-green-400 hover:text-green-300' 
+                        : 'text-green-600 hover:text-green-700'
+                    }`}
+                    whileHover={{ x: 8 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    View Project 
-                    <ExternalLink size={16} className="group-hover:rotate-45 transition-transform duration-300" />
+                    <span className="relative">
+                      View Project
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <motion.div
+                      whileHover={{ rotate: 45, scale: 1.1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ExternalLink size={16} />
+                    </motion.div>
                   </motion.a>
                 </div>
+                
+                {/* Hover Glow Effect */}
+                <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none ${
+                  isDarkMode ? 'bg-green-400' : 'bg-green-500'
+                }`}></div>
               </motion.div>
             ))}
           </div>
