@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'portfolio', 'skills', 'contact'];
+      const sections = ['home', 'about', 'learning-experience', 'portfolio', 'skills', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -123,12 +123,13 @@ function App() {
     },
     {
       id: 2,
-      title: "Python Web Scraper",
-      description: "Advanced web scraping tool built with Python for automated data collection and analysis from various web sources.",
-      image: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=800",
-      technologies: ["Python", "BeautifulSoup", "Pandas", "SQL"],
-      link: "#",
-      category: "Data Analytics"
+      title: "Yummy Food Review",
+      description: "A food review platform for restaurants in Addis Ababa, Ethiopia, enabling user authentication, restaurant discovery with search/filters, star-based reviews, and comprehensive dashboards for owners and admins.",
+      image: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Firebase", "Cloudinary", "Framer Motion"],
+      link: "https://yummy-eatery.netlify.app",
+      github: "https://github.com/israelseleshi/yummy-eatery",
+      category: "Web Development"
     },
     {
       id: 3,
@@ -177,12 +178,26 @@ function App() {
       period: "Sept 2019 - June 2022",
       grade: "Excellent Performance",
       modules: ["Mathematics (A)", "Biology (A)", "English (A)", "Information Technology (A)", "Physics (B)", "Chemistry (B)"]
+    },
+    {
+      institution: "Intern at EthSwitch S.C.",
+      degree: "Gaining hands-on experience in a professional tech environment, working on real-world problems and collaborating with experienced engineers.",
+      period: "Present",
+      grade: "",
+      modules: []
+    },
+    {
+      institution: "ALX Data Science Course",
+      degree: "Enrolled in a rigorous, project-based data science program covering Python, SQL, statistics, and machine learning fundamentals.",
+      period: "Ongoing",
+      grade: "",
+      modules: []
     }
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 relative overflow-hidden ${
-      isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+    <div className={`min-h-screen transition-colors duration-300 ${
+      isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
     }`}>
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -216,12 +231,12 @@ function App() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              {['Home', 'About', 'Portfolio', 'Skills', 'Contact'].map((item, index) => (
+              {['Home', 'About', 'Learning & Experience', 'Portfolio', 'Skills', 'Contact'].map((item, index) => (
                 <motion.button
                   key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
+                  onClick={() => scrollToSection(item === 'Learning & Experience' ? 'learning-experience' : item.toLowerCase())}
                   className={`text-sm font-medium transition-colors relative ${
-                    activeSection === item.toLowerCase()
+                    activeSection === (item === 'Learning & Experience' ? 'learning-experience' : item.toLowerCase())
                       ? 'text-green-500'
                       : isDarkMode 
                         ? 'text-gray-300 hover:text-white' 
@@ -233,7 +248,7 @@ function App() {
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
                   {item}
-                  {activeSection === item.toLowerCase() && (
+                  {activeSection === (item === 'Learning & Experience' ? 'learning-experience' : item.toLowerCase()) && (
                     <motion.div
                       className="absolute -bottom-1 left-0 right-0 h-0.5 bg-green-500"
                       layoutId="activeSection"
@@ -371,12 +386,12 @@ function App() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="flex flex-col space-y-3">
-                  {['Home', 'About', 'Portfolio', 'Skills', 'Contact'].map((item, index) => (
+                  {['Home', 'About', 'Learning & Experience', 'Portfolio', 'Skills', 'Contact'].map((item, index) => (
                     <motion.button
                       key={item}
-                      onClick={() => scrollToSection(item.toLowerCase())}
+                      onClick={() => scrollToSection(item === 'Learning & Experience' ? 'learning-experience' : item.toLowerCase())}
                       className={`text-left text-sm font-medium py-2 transition-colors ${
-                        activeSection === item.toLowerCase()
+                        activeSection === (item === 'Learning & Experience' ? 'learning-experience' : item.toLowerCase())
                           ? 'text-green-500'
                           : isDarkMode 
                             ? 'text-gray-300 hover:text-white' 
@@ -398,25 +413,27 @@ function App() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-20 pb-16 sm:pt-24 sm:pb-20 overflow-hidden">
+      <section id="home" className="pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16"
+            className="flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 lg:gap-16"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <div className="flex-1 text-center lg:text-left">
+            <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
               <motion.div
                 variants={itemVariants}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full text-sm font-medium mb-6"
+                className={`inline-flex items-center gap-2 px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 ${
+                  isDarkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-50 text-green-700'
+                }`}
               >
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 Available for opportunities
               </motion.div>
               
               <motion.h1 
-                className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight transition-colors duration-300 ${
+                className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight transition-colors duration-300 mb-3 sm:mb-4 ${
                   isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}
                 variants={itemVariants}
@@ -432,7 +449,7 @@ function App() {
               </motion.h1>
               
               <motion.h2 
-                className={`text-xl sm:text-2xl mt-4 mb-6 transition-colors duration-300 ${
+                className={`text-lg sm:text-xl md:text-2xl mb-4 sm:mb-6 transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}
                 variants={itemVariants}
@@ -440,22 +457,23 @@ function App() {
                 Information Systems Student & Aspiring Data Scientist
               </motion.h2>
               
-              <p 
-                className={`text-lg leading-relaxed transition-colors duration-300 ${
+              <motion.p 
+                className={`text-base sm:text-lg leading-relaxed mb-6 sm:mb-8 transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}
+                variants={itemVariants}
               >
                 Passionate about <span className="text-green-500">data analytics</span> and <span className="text-green-500">web development</span> with <span className="border-b-2 border-green-500">hands-on experience</span> in <span className="text-green-500">full-stack development</span>. 
                 Currently pursuing my Bachelor's degree while <span className="border-b-2 border-green-500">building</span> <span className="text-green-500">innovative solutions</span> and <span className="border-b-2 border-green-500">exploring the world of data science</span>.
-              </p>
+              </motion.p>
               
               <motion.div 
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6 sm:mb-8"
                 variants={itemVariants}
               >
                 <motion.button
                   onClick={() => scrollToSection('portfolio')}
-                  className="group px-8 py-3 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center gap-2 relative"
+                  className="group px-6 py-3 sm:px-8 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center gap-2 relative text-sm sm:text-base"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -467,7 +485,11 @@ function App() {
                 </motion.button>
                 <motion.button 
                   onClick={() => window.open('https://drive.google.com/file/d/1vAomA8a8pZtk5ggSrUtqV3ByT8MhUnXq/view?usp=sharing', '_blank')}
-                  className="group px-8 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 flex items-center justify-center gap-2 relative"
+                  className={`group px-6 py-3 sm:px-8 font-medium rounded-lg transition-all duration-300 flex items-center justify-center gap-2 relative text-sm sm:text-base ${
+                    isDarkMode 
+                      ? 'border border-gray-600 text-gray-200 hover:border-gray-500 hover:bg-gray-700 hover:text-white' 
+                      : 'border border-gray-300 text-gray-700 hover:border-gray-400 hover:bg-gray-50'
+                  }`}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -480,26 +502,26 @@ function App() {
               </motion.div>
 
               <motion.div 
-                className="flex items-center justify-center lg:justify-start gap-6 mt-8"
+                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6"
                 variants={itemVariants}
               >
                 <div className={`flex items-center gap-2 transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-600'
                 }`}>
-                  <MapPin size={16} />
-                  <span className="text-sm">Addis Ababa, Ethiopia</span>
+                  <MapPin size={14} className="sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">Addis Ababa, Ethiopia</span>
                 </div>
                 <div className={`flex items-center gap-2 transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-400' : 'text-gray-600'
                 }`}>
-                  <img src="/aauLogo.png" alt="Addis Ababa University Logo" className="w-4 h-4" />
-                  <span className="text-sm">AAU Student</span>
+                  <img src="/aauLogo.png" alt="Addis Ababa University Logo" className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">AAU Student</span>
                 </div>
               </motion.div>
             </div>
             
             <motion.div 
-              className="flex-shrink-0"
+              className="flex-shrink-0 order-1 lg:order-2"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -507,7 +529,7 @@ function App() {
               <motion.img
                 src="/profile.png"
                 alt="Israel Seleshi - Professional headshot"
-                className="w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain object-center rounded-full"
+                className="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 object-contain object-center rounded-full mx-auto"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               />
@@ -518,201 +540,421 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className={`py-16 sm:py-20 transition-colors duration-300 ${
+      <section id="about" className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 ${
         isDarkMode ? 'bg-gray-800' : 'bg-white'
       }`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            className="text-center mb-8 sm:mb-12"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div
-              initial={{ x: -50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <h2 className={`text-3xl sm:text-4xl font-bold mb-6 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}>
-                About Me
-              </h2>
-              <p className={`text-lg leading-relaxed mb-6 transition-colors duration-300 ${
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 transition-colors duration-300 ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
+              About Me
+            </h2>
+          </motion.div>
+          
+          <motion.div 
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="space-y-4 sm:space-y-6">
+              <p className={`text-base sm:text-lg leading-relaxed transition-colors duration-300 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 I'm an <strong className="font-bold text-green-500">Information Systems Student</strong> at Addis Ababa University with a passion for <span className="font-bold text-green-500">data analytics</span> 
-                and <span className="font-bold text-green-500">web development</span>. With <span className="font-bold border-b-2 border-green-500">hands-on experience</span> at EthSwitch S.C., I've gained 
+                and <span className="font-bold text-green-500">web development</span>. With <span className="border-b-2 border-green-500">hands-on experience</span> at EthSwitch S.C., I've gained 
                 valuable insights into the tech industry and developed strong technical skills.
               </p>
               
-              <p className={`text-lg leading-relaxed mb-8 transition-colors duration-300 ${
+              <p className={`text-base sm:text-lg leading-relaxed transition-colors duration-300 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 My expertise spans across <span className="font-bold text-green-500">data analytics</span>, <span className="font-bold text-green-500">full-stack development</span>, and database management. 
                 I'm fluent in both Amharic and English, with strong communication, problem-solving, and teamwork abilities. 
                 I'm eager to pursue a career as an <strong className="font-bold text-green-500">Aspiring Data Scientist</strong>.
               </p>
-              
-              <div className="grid grid-cols-2 gap-6 mb-8 mt-6">
-                <motion.div 
-                  className={`text-center p-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
-                  }`}
-                  whileHover={{ scale: 1.05, backgroundColor: isDarkMode ? "#065f46" : "#f0fdf4" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-2xl font-bold text-green-500 mb-1">3.5/4.0</div>
-                  <div className={`text-sm transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>Current GPA</div>
-                </motion.div>
-                <motion.div 
-                  className={`text-center p-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
-                  }`}
-                  whileHover={{ scale: 1.05, backgroundColor: isDarkMode ? "#065f46" : "#f0fdf4" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="text-2xl font-bold text-green-500 mb-1">2026</div>
-                  <div className={`text-sm transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>Expected Graduation</div>
-                </motion.div>
-              </div>
+            </div>
 
-              <div className={`flex items-center gap-4 transition-colors duration-300 ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                <Mail size={16} />
-                <span>israelseleshi09@gmail.com</span>
-              </div>
-              <div className={`flex items-center gap-4 mt-2 transition-colors duration-300 ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                <Phone size={16} />
-                <span>+251-920-190-438</span>
-              </div>
-            </motion.div>
-            
+            {/* Contact Info */}
             <motion.div 
-              className="space-y-6"
-              initial={{ x: 50, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              {/* Education Cards */}
-            <div className="space-y-6">
-              {education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  className={`p-6 rounded-xl transition-colors duration-300 ${
-                    isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-gray-50'
-                  }`}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 flex-shrink-0 mt-1">
-                      {edu.institution === "Saint Joseph High School" ? (
-                        <img src="/stJospeghSchoolLogo-background removed.png" alt="Saint Joseph High School Logo" className="w-full h-full object-contain" />
-                      ) : (
-                        <img src="/aauLogo.png" alt="Addis Ababa University Logo" className="w-full h-full object-contain" />
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className={`font-semibold mb-1 transition-colors duration-300 ${
-                        isDarkMode ? 'text-white' : 'text-gray-900'
-                      }`}>{edu.institution}</h3>
-                      <p className="text-green-600 font-medium mb-2">{edu.degree}</p>
-                      <div className={`flex items-center gap-4 text-sm mb-3 transition-colors duration-300 ${
-                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                      }`}>
-                        <span className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          {edu.period}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Star size={14} />
-                          {edu.grade}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {edu.modules.slice(0, 3).map((module, idx) => (
-                          <span
-                            key={idx}
-                            className={`px-2 py-1 text-xs rounded-full border transition-colors duration-300 ${
-                              isDarkMode 
-                                ? 'bg-gray-600 text-gray-300 border-gray-500' 
-                                : 'bg-white text-gray-600 border-gray-200'
-                            }`}
-                          >
-                            {module}
-                          </span>
-                        ))}
-                        {edu.modules.length > 3 && (
-                          <span className={`px-2 py-1 text-xs rounded-full border transition-colors duration-300 ${
-                            isDarkMode 
-                              ? 'bg-gray-600 text-gray-300 border-gray-500' 
-                              : 'bg-white text-gray-600 border-gray-200'
-                          }`}>
-                            +{edu.modules.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-              {/* Volunteering Experience */}
-          <motion.div
-            className={`p-6 rounded-xl transition-colors duration-300 ${
-              isDarkMode ? 'bg-gray-800 border border-gray-700' : 'bg-gray-50'
-            }`}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 flex-shrink-0 mt-1">
-                <Heart size={20} className="text-green-600" />
+              <div className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg transition-all duration-300 ${
+                isDarkMode ? 'bg-gray-700/50 hover:bg-gray-700' : 'bg-gray-50 hover:bg-gray-100'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <Mail size={16} className="text-green-500 flex-shrink-0 sm:w-5 sm:h-5" />
+                  <span className={`font-medium text-sm sm:text-base transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                  }`}>israelseleshi09@gmail.com</span>
+                </div>
               </div>
-              <div>
-                <h3 className={`font-semibold mb-1 transition-colors duration-300 ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
-                }`}>Academic Tutor</h3>
-                <p className="text-green-600 font-medium mb-2">Askal Charity Association</p>
-                <p className={`text-sm mb-3 transition-colors duration-300 ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                }`}>
-                  <Calendar size={14} className="inline mr-1" />
-                  June 2021 - August 2021
-                </p>
-                <p className={`text-sm transition-colors duration-300 ${
-                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                }`}>
-                  Provided tutoring to 30+ students, achieving 20% average improvement in test scores 
-                  through engaging lesson plans and mentorship.
-                </p>
+              <div className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg transition-all duration-300 ${
+                isDarkMode ? 'bg-gray-700/50 hover:bg-gray-700' : 'bg-gray-50 hover:bg-gray-100'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <Phone size={16} className="text-green-500 flex-shrink-0 sm:w-5 sm:h-5" />
+                  <span className={`font-medium text-sm sm:text-base transition-colors duration-300 ${
+                    isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                  }`}>+251-920-190-438</span>
+                </div>
               </div>
-            </div>
-          </motion.div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
+      {/* Learning & Experience Section */}
+      <section id="learning-experience" className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 relative overflow-hidden ${
+        isDarkMode ? 'bg-gray-800' : 'bg-white'
+      }`}>
+        {/* Background Image */}
+        <div 
+          className="absolute opacity-5 sm:opacity-10 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/roadmap.png)',
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+            top: '80px',
+            left: '0',
+            right: '0',
+            bottom: '0'
+          }}
+        ></div>
+        
+        {/* Gradient Overlay for Premium Feel */}
+        <div className={`absolute inset-0 ${
+          isDarkMode 
+            ? 'bg-gradient-to-br from-gray-800/90 via-gray-800/95 to-gray-900/90' 
+            : 'bg-gradient-to-br from-white/90 via-white/95 to-gray-50/90'
+        }`}></div>
+        
+        {/* Content Overlay */}
+        <div className="relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Title */}
+          <motion.div 
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div
+              className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+                isDarkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-50 text-green-700'
+              }`}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              My Journey
+            </motion.div>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 transition-colors duration-300 bg-gradient-to-r ${
+              isDarkMode 
+                ? 'from-white via-gray-100 to-green-400 bg-clip-text text-transparent' 
+                : 'from-gray-900 via-gray-800 to-green-600 bg-clip-text text-transparent'
+            }`}>
+              Learning & Experience
+            </h2>
+            <p className={`text-base sm:text-lg max-w-2xl mx-auto transition-colors duration-300 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              A timeline of my educational journey and professional growth
+            </p>
+          </motion.div>
+          
+          {/* Timeline Container */}
+          <div className="relative max-w-5xl mx-auto">
+            {/* Desktop Timeline Line - Hidden on Mobile */}
+            <div className={`hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full ${
+              isDarkMode 
+                ? 'bg-gradient-to-b from-green-400 via-blue-500 to-purple-600' 
+                : 'bg-gradient-to-b from-green-500 via-blue-600 to-purple-700'
+            }`}></div>
+            
+            {/* Mobile Timeline Line - Visible only on Mobile */}
+            <div className={`lg:hidden absolute left-6 top-0 w-0.5 h-full ${
+              isDarkMode 
+                ? 'bg-gradient-to-b from-green-400 via-blue-500 to-purple-600' 
+                : 'bg-gradient-to-b from-green-500 via-blue-600 to-purple-700'
+            }`}></div>
+            
+            {/* Timeline Items - Chronologically Descending */}
+            <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+              {/* EthSwitch Internship - Present */}
+              <motion.div 
+                className="relative flex items-center lg:justify-center"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                {/* Timeline Dot - Desktop */}
+                <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-4 border-white shadow-2xl z-20">
+                  <div className="absolute inset-1 bg-purple-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Timeline Dot - Mobile */}
+                <div className="lg:hidden absolute left-6 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-3 border-white shadow-xl z-20">
+                  <div className="absolute inset-0.5 bg-purple-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Content Card - Mobile: Full Width, Desktop: Left Side */}
+                <div className="w-full lg:w-5/12 ml-16 lg:ml-0 lg:pr-12">
+                  <motion.div 
+                    className={`p-4 sm:p-6 lg:p-8 rounded-2xl shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 ${
+                      isDarkMode 
+                        ? 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-purple-500/30 hover:border-purple-400/50' 
+                        : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-purple-200/50 hover:border-purple-300/70'
+                    }`}
+                    whileHover={{ scale: 1.03, y: -8, rotateY: 5 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <img src="/eth-switch-Logo.png" alt="EthSwitch S.C." className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+                      <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">Present</span>
+                    </div>
+                    <h3 className={`font-bold text-lg sm:text-xl lg:text-2xl mb-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Intern at EthSwitch S.C.</h3>
+                    <p className="text-green-600 font-semibold mb-3 text-sm sm:text-base">Software Development Intern</p>
+                    <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Gaining hands-on experience in a professional tech environment, working on real-world problems and collaborating with experienced engineers.
+                    </p>
+                  </motion.div>
+                </div>
+                
+                {/* Empty space for right side - Desktop only */}
+                <div className="hidden lg:block w-5/12"></div>
+              </motion.div>
+
+              {/* ALX Data Science Course - Ongoing */}
+              <motion.div 
+                className="relative flex items-center lg:justify-center"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {/* Timeline Dot - Desktop */}
+                <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-4 border-white shadow-2xl z-20">
+                  <div className="absolute inset-1 bg-green-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Timeline Dot - Mobile */}
+                <div className="lg:hidden absolute left-6 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-green-400 to-green-600 rounded-full border-3 border-white shadow-xl z-20">
+                  <div className="absolute inset-0.5 bg-green-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Empty space for left side - Desktop only */}
+                <div className="hidden lg:block w-5/12"></div>
+                
+                {/* Content Card - Mobile: Full Width, Desktop: Right Side */}
+                <div className="w-full lg:w-5/12 ml-16 lg:ml-0 lg:pl-12">
+                  <motion.div 
+                    className={`p-4 sm:p-6 lg:p-8 rounded-2xl shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 ${
+                      isDarkMode 
+                        ? 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-green-500/30 hover:border-green-400/50' 
+                        : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-green-200/50 hover:border-green-300/70'
+                    }`}
+                    whileHover={{ scale: 1.03, y: -8, rotateY: -5 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <img src="/alxLog.png" alt="ALX" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+                      <span className="bg-gradient-to-r from-green-500 to-green-600 text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">Ongoing</span>
+                    </div>
+                    <h3 className={`font-bold text-lg sm:text-xl lg:text-2xl mb-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>ALX Data Science Course</h3>
+                    <p className="text-green-600 font-semibold mb-3 text-sm sm:text-base">Data Science Program</p>
+                    <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Enrolled in a rigorous, project-based data science program covering Python, SQL, statistics, & machine learning fundamentals.
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Addis Ababa University - 2023-2026 */}
+              <motion.div 
+                className="relative flex items-center lg:justify-center"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                {/* Timeline Dot - Desktop */}
+                <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full border-4 border-white shadow-2xl z-20">
+                  <div className="absolute inset-1 bg-blue-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Timeline Dot - Mobile */}
+                <div className="lg:hidden absolute left-6 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full border-3 border-white shadow-xl z-20">
+                  <div className="absolute inset-0.5 bg-blue-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Content Card - Mobile: Full Width, Desktop: Left Side */}
+                <div className="w-full lg:w-5/12 ml-16 lg:ml-0 lg:pr-12">
+                  <motion.div 
+                    className={`p-4 sm:p-6 lg:p-8 rounded-2xl shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 ${
+                      isDarkMode 
+                        ? 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-blue-500/30 hover:border-blue-400/50' 
+                        : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-blue-200/50 hover:border-blue-300/70'
+                    }`}
+                    whileHover={{ scale: 1.03, y: -8, rotateY: 5 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <img src="/aauLogo.png" alt="Addis Ababa University" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+                      <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">2023 - 2026</span>
+                    </div>
+                    <h3 className={`font-bold text-lg sm:text-xl lg:text-2xl mb-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Addis Ababa University</h3>
+                    <p className="text-green-600 font-semibold mb-3 text-sm sm:text-base">Bachelor of Science in Information Science</p>
+                    <p className={`text-sm sm:text-base mb-4 leading-relaxed transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Current GPA: 3.5/4.0 - Studying Database Systems, Data Structures & Algorithms, and Web Development.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <span className={`px-3 py-1.5 text-xs sm:text-sm rounded-full font-medium transition-colors duration-300 ${
+                        isDarkMode ? 'bg-gray-700/70 text-gray-300 border border-gray-600' : 'bg-gray-100 text-gray-700 border border-gray-200'
+                      }`}>Database Systems</span>
+                      <span className={`px-3 py-1.5 text-xs sm:text-sm rounded-full font-medium transition-colors duration-300 ${
+                        isDarkMode ? 'bg-gray-700/70 text-gray-300 border border-gray-600' : 'bg-gray-100 text-gray-700 border border-gray-200'
+                      }`}>Data Structures</span>
+                    </div>
+                  </motion.div>
+                </div>
+                
+                {/* Empty space for right side - Desktop only */}
+                <div className="hidden lg:block w-5/12"></div>
+              </motion.div>
+
+              {/* Saint Joseph High School - 2019-2022 */}
+              <motion.div 
+                className="relative flex items-center lg:justify-center"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                {/* Timeline Dot - Desktop */}
+                <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full border-4 border-white shadow-2xl z-20">
+                  <div className="absolute inset-1 bg-orange-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Timeline Dot - Mobile */}
+                <div className="lg:hidden absolute left-6 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full border-3 border-white shadow-xl z-20">
+                  <div className="absolute inset-0.5 bg-orange-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Empty space for left side - Desktop only */}
+                <div className="hidden lg:block w-5/12"></div>
+                
+                {/* Content Card - Mobile: Full Width, Desktop: Right Side */}
+                <div className="w-full lg:w-5/12 ml-16 lg:ml-0 lg:pl-12">
+                  <motion.div 
+                    className={`p-4 sm:p-6 lg:p-8 rounded-2xl shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 ${
+                      isDarkMode 
+                        ? 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-orange-500/30 hover:border-orange-400/50' 
+                        : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-orange-200/50 hover:border-orange-300/70'
+                    }`}
+                    whileHover={{ scale: 1.03, y: -8, rotateY: -5 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <img src="/stJospeghSchoolLogo.png" alt="Saint Joseph High School" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+                      <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">2019 - 2022</span>
+                    </div>
+                    <h3 className={`font-bold text-lg sm:text-xl lg:text-2xl mb-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Saint Joseph High School</h3>
+                    <p className="text-green-600 font-semibold mb-3 text-sm sm:text-base">High School Diploma</p>
+                    <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Excellent Performance with strong foundation in Mathematics, Biology, and Information Technology.
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Academic Tutor Experience - 2021 */}
+              <motion.div 
+                className="relative flex items-center lg:justify-center"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                {/* Timeline Dot - Desktop */}
+                <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full border-4 border-white shadow-2xl z-20">
+                  <div className="absolute inset-1 bg-pink-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Timeline Dot - Mobile */}
+                <div className="lg:hidden absolute left-6 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full border-3 border-white shadow-xl z-20">
+                  <div className="absolute inset-0.5 bg-pink-500 rounded-full animate-pulse"></div>
+                </div>
+                
+                {/* Content Card - Mobile: Full Width, Desktop: Left Side */}
+                <div className="w-full lg:w-5/12 ml-16 lg:ml-0 lg:pr-12">
+                  <motion.div 
+                    className={`p-4 sm:p-6 lg:p-8 rounded-2xl shadow-2xl transition-all duration-500 backdrop-blur-sm border-2 ${
+                      isDarkMode 
+                        ? 'bg-gradient-to-br from-gray-800/90 to-gray-900/90 border-pink-500/30 hover:border-pink-400/50' 
+                        : 'bg-gradient-to-br from-white/90 to-gray-50/90 border-pink-200/50 hover:border-pink-300/70'
+                    }`}
+                    whileHover={{ scale: 1.03, y: -8, rotateY: 5 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <img src="/askal_Logo.png" alt="Askal Charity Association" className="w-6 h-6 sm:w-8 sm:h-8 object-contain" />
+                      <span className="bg-gradient-to-r from-pink-500 to-pink-600 text-white text-xs sm:text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">2021</span>
+                    </div>
+                    <h3 className={`font-bold text-lg sm:text-xl lg:text-2xl mb-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Academic Tutor</h3>
+                    <p className="text-green-600 font-semibold mb-3 text-sm sm:text-base">Askal Charity Association</p>
+                    <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Provided tutoring to 30+ students, achieving 20% average improvement in test scores through engaging lesson plans and mentorship.
+                    </p>
+                  </motion.div>
+                </div>
+                
+                {/* Empty space for right side - Desktop only */}
+                <div className="hidden lg:block w-5/12"></div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+
       {/* Portfolio Section */}
       <section id="portfolio" className={`py-16 sm:py-20 transition-colors duration-300 ${
-        isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+        isDarkMode ? 'bg-gray-800' : 'bg-gray-50'
       }`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
@@ -729,7 +971,7 @@ function App() {
             </h2>
             <p className={`text-lg max-w-2xl mx-auto transition-colors duration-300 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}>
+            }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>
               A showcase of my recent work in <span className="font-bold">web development</span>, <span className="font-bold">data analytics</span>, and design projects.
             </p>
           </motion.div>
@@ -765,13 +1007,13 @@ function App() {
                 </div>
                 <div className="p-6">
                   <h3 className={`text-xl font-bold mb-2 group-hover:text-green-600 transition-colors ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>
-                    {project.title}
-                  </h3>
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>
+                  {project.title}
+                </h3>
                   <p className={`mb-4 leading-relaxed transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>{project.description}</p>
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`} style={{ userSelect: 'text', pointerEvents: 'auto' }}>{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.technologies.map((tech) => (
                       <motion.span
@@ -780,6 +1022,7 @@ function App() {
                           isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
                         }`}
                         whileHover={{ scale: 1.1, backgroundColor: "#dcfce7", borderColor: "#10b981" }}
+                        style={{ userSelect: 'text', pointerEvents: 'auto' }}
                       >
                         {tech}
                       </motion.span>
@@ -868,209 +1111,319 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className={`py-16 sm:py-20 transition-colors duration-300 ${
-        isDarkMode ? 'bg-gray-900' : 'bg-gray-50'
+      <section id="contact" className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 relative overflow-hidden ${
+        isDarkMode ? 'bg-gray-800' : 'bg-gray-50'
       }`}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Gradient Background */}
+        <div className={`absolute inset-0 ${
+          isDarkMode 
+            ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900' 
+            : 'bg-gradient-to-br from-gray-50 via-white to-gray-100'
+        }`}></div>
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <motion.h2 
-              className={`text-3xl sm:text-4xl font-bold mb-4 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
+            <motion.div
+              className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
+                isDarkMode ? 'bg-green-900/30 text-green-400' : 'bg-green-50 text-green-700'
               }`}
-              animate={{
-                textShadow: [
-                  "0 0 0px rgba(16, 185, 129, 0)",
-                  "0 0 10px rgba(16, 185, 129, 0.5)",
-                  "0 0 0px rgba(16, 185, 129, 0)"
-                ]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Get In Touch
+            </motion.div>
+            <motion.h2 
+              className={`text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 transition-colors duration-300 bg-gradient-to-r ${
+                isDarkMode 
+                  ? 'from-white via-gray-100 to-green-400 bg-clip-text text-transparent' 
+                  : 'from-gray-900 via-gray-800 to-green-600 bg-clip-text text-transparent'
+              }`}
             >
               Let's Work Together
             </motion.h2>
-            <p className={`text-lg transition-colors duration-300 ${
+            <p className={`text-base sm:text-lg max-w-2xl mx-auto transition-colors duration-300 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
               Ready to collaborate on your next <span className="font-bold">innovative solution</span>? Let's discuss your vision.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Contact Information */}
             <motion.div
+              className="order-2 lg:order-1"
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h3 className={`text-xl font-semibold mb-6 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
-              }`}>Get In Touch</h3>
-              <div className="space-y-4">
-                <motion.div 
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
-                  }`}
-                  whileHover={{ x: 10 }}
-                >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${
-                    isDarkMode ? 'bg-green-900/30' : 'bg-green-50'
-                  }`}>
-                    <Mail size={20} className="text-green-600" />
-                  </div>
-                  <div>
-                    <div className={`font-medium transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Email</div>
-                    <div className={`transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>israelseleshi09@gmail.com</div>
-                  </div>
-                </motion.div>
-                <motion.div 
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
-                  }`}
-                  whileHover={{ x: 10 }}
-                >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${
-                    isDarkMode ? 'bg-green-900/30' : 'bg-green-50'
-                  }`}>
-                    <Phone size={20} className="text-green-600" />
-                  </div>
-                  <div>
-                    <div className={`font-medium transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Phone</div>
-                    <div className={`transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>+251-920-190-438</div>
-                  </div>
-                </motion.div>
-                <motion.div 
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
-                  }`}
-                  whileHover={{ x: 10 }}
-                >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${
-                    isDarkMode ? 'bg-green-900/30' : 'bg-green-50'
-                  }`}>
-                    <Linkedin size={20} className="text-green-600" />
-                  </div>
-                  <div>
-                    <div className={`font-medium transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>LinkedIn</div>
-                    <div className={`transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>israel-theodros-seleshi</div>
-                  </div>
-                </motion.div>
-                <motion.div 
-                  className={`flex items-center gap-4 p-4 rounded-lg transition-colors duration-300 ${
-                    isDarkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
-                  }`}
-                  whileHover={{ x: 10 }}
-                >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-300 ${
-                    isDarkMode ? 'bg-green-900/30' : 'bg-green-50'
-                  }`}>
-                    <MapPin size={20} className="text-green-600" />
-                  </div>
-                  <div>
-                    <div className={`font-medium transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Location</div>
-                    <div className={`transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>Mozambique Street, Addis Ababa, Ethiopia</div>
-                  </div>
-                </motion.div>
+              <div>
+                <h3 className={`text-lg sm:text-xl font-bold mb-6 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>Contact Information</h3>
+                <div className="space-y-4 sm:space-y-6">
+                  <motion.div 
+                    className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-300 cursor-pointer ${
+                      isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'
+                    }`}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.div 
+                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                        isDarkMode ? 'bg-green-900/30 group-hover:bg-green-800/40' : 'bg-green-50 group-hover:bg-green-100'
+                      }`}
+                      whileHover={{ rotate: 10 }}
+                    >
+                      <Mail size={20} className="text-green-600 group-hover:text-green-500" />
+                    </motion.div>
+                    <div className="flex-1 min-w-0">
+                      <div className={`font-semibold text-sm sm:text-base transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>Email</div>
+                      <a 
+                        href="mailto:israelseleshi09@gmail.com" 
+                        className={`text-xs sm:text-sm transition-colors duration-300 hover:text-green-500 break-all ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                        }`}
+                      >
+                        israelseleshi09@gmail.com
+                      </a>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-300 cursor-pointer ${
+                      isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'
+                    }`}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.div 
+                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                        isDarkMode ? 'bg-green-900/30 group-hover:bg-green-800/40' : 'bg-green-50 group-hover:bg-green-100'
+                      }`}
+                      whileHover={{ rotate: 10 }}
+                    >
+                      <Phone size={20} className="text-green-600 group-hover:text-green-500" />
+                    </motion.div>
+                    <div className="flex-1">
+                      <div className={`font-semibold text-sm sm:text-base transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>Phone</div>
+                      <a 
+                        href="tel:+251920190438" 
+                        className={`text-xs sm:text-sm transition-colors duration-300 hover:text-green-500 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                        }`}
+                      >
+                        +251-920-190-438
+                      </a>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-300 cursor-pointer ${
+                      isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'
+                    }`}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <motion.div 
+                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                        isDarkMode ? 'bg-green-900/30 group-hover:bg-green-800/40' : 'bg-green-50 group-hover:bg-green-100'
+                      }`}
+                      whileHover={{ rotate: 10 }}
+                    >
+                      <Linkedin size={20} className="text-green-600 group-hover:text-green-500" />
+                    </motion.div>
+                    <div className="flex-1 min-w-0">
+                      <div className={`font-semibold text-sm sm:text-base transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>LinkedIn</div>
+                      <a 
+                        href="https://linkedin.com/in/israel-theodros-seleshi" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className={`text-xs sm:text-sm transition-colors duration-300 hover:text-green-500 break-all ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                        }`}
+                      >
+                        israel-theodros-seleshi
+                      </a>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    className={`group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-300 ${
+                      isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-100/50'
+                    }`}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                  >
+                    <motion.div 
+                      className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                        isDarkMode ? 'bg-green-900/30 group-hover:bg-green-800/40' : 'bg-green-50 group-hover:bg-green-100'
+                      }`}
+                      whileHover={{ rotate: 10 }}
+                    >
+                      <MapPin size={20} className="text-green-600 group-hover:text-green-500" />
+                    </motion.div>
+                    <div className="flex-1">
+                      <div className={`font-semibold text-sm sm:text-base transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>Location</div>
+                      <div className={`text-xs sm:text-sm transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                      }`}>Mozambique Street, Addis Ababa, Ethiopia</div>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
 
+            {/* Contact Form */}
             <motion.div
+              className="order-1 lg:order-2"
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <form className="space-y-6">
-                <div>
-                  <label htmlFor="name" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Name
-                  </label>
-                  <motion.input
-                    type="text"
-                    id="name"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 ${
+              <div>
+                <h3 className={`text-lg sm:text-xl font-bold mb-6 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>Send Message</h3>
+                <form className="space-y-4 sm:space-y-6">
+                  <div className="relative">
+                    <motion.input
+                      type="text"
+                      id="name"
+                      className={`w-full px-4 pt-6 pb-3 border-2 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 peer ${
+                        isDarkMode 
+                          ? 'bg-gray-800/50 border-gray-600/50 text-white focus:bg-gray-800' 
+                          : 'bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white'
+                      }`}
+                      placeholder=" "
+                      whileFocus={{ scale: 1.02 }}
+                    />
+                    <label 
+                      htmlFor="name"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-green-500 top-2 text-xs font-medium ${
+                        isDarkMode ? 'text-gray-400 peer-placeholder-shown:text-gray-400' : 'text-gray-600 peer-placeholder-shown:text-gray-500'
+                      }`}
+                    >
+                      Your Name
+                    </label>
+                  </div>
+                  <div className="relative">
+                    <motion.input
+                      type="email"
+                      id="email"
+                      className={`w-full px-4 pt-6 pb-3 border-2 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 peer ${
+                        isDarkMode 
+                          ? 'bg-gray-800/50 border-gray-600/50 text-white focus:bg-gray-800' 
+                          : 'bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white'
+                      }`}
+                      placeholder=" "
+                      whileFocus={{ scale: 1.02 }}
+                    />
+                    <label 
+                      htmlFor="email"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-green-500 top-2 text-xs font-medium ${
+                        isDarkMode ? 'text-gray-400 peer-placeholder-shown:text-gray-400' : 'text-gray-600 peer-placeholder-shown:text-gray-500'
+                      }`}
+                    >
+                      Email Address
+                    </label>
+                  </div>
+                  <div className="relative">
+                    <motion.input
+                      type="text"
+                      id="subject"
+                      className={`w-full px-4 pt-6 pb-3 border-2 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 peer ${
+                        isDarkMode 
+                          ? 'bg-gray-800/50 border-gray-600/50 text-white focus:bg-gray-800' 
+                          : 'bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white'
+                      }`}
+                      placeholder=" "
+                      whileFocus={{ scale: 1.02 }}
+                    />
+                    <label 
+                      htmlFor="subject"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-green-500 top-2 text-xs font-medium ${
+                        isDarkMode ? 'text-gray-400 peer-placeholder-shown:text-gray-400' : 'text-gray-600 peer-placeholder-shown:text-gray-500'
+                      }`}
+                    >
+                      Subject
+                    </label>
+                  </div>
+                  <div className="relative">
+                    <motion.textarea
+                      id="message"
+                      rows={4}
+                      className={`w-full px-4 pt-6 pb-3 border-2 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all resize-none duration-300 peer ${
+                        isDarkMode 
+                          ? 'bg-gray-800/50 border-gray-600/50 text-white focus:bg-gray-800' 
+                          : 'bg-white/50 border-gray-300/50 text-gray-900 focus:bg-white'
+                      }`}
+                      placeholder=" "
+                      whileFocus={{ scale: 1.02 }}
+                    ></motion.textarea>
+                    <label 
+                      htmlFor="message"
+                      className={`absolute left-4 transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-xs peer-focus:text-green-500 top-2 text-xs font-medium ${
+                        isDarkMode ? 'text-gray-400 peer-placeholder-shown:text-gray-400' : 'text-gray-600 peer-placeholder-shown:text-gray-500'
+                      }`}
+                    >
+                      Your Message
+                    </label>
+                  </div>
+                  
+                  <motion.button
+                    type="submit"
+                    className={`w-full px-6 py-4 rounded-xl font-semibold text-white transition-all duration-300 relative overflow-hidden group ${
                       isDarkMode 
-                        ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                        ? 'bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400' 
+                        : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700'
                     }`}
-                    placeholder="Your name"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Email
-                  </label>
-                  <motion.input
-                    type="email"
-                    id="email"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all duration-300 ${
-                      isDarkMode 
-                        ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                    }`}
-                    placeholder="your@email.com"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Message
-                  </label>
-                  <motion.textarea
-                    id="message"
-                    rows={4}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all resize-none duration-300 ${
-                      isDarkMode 
-                        ? 'bg-gray-800 border-gray-600 text-white placeholder-gray-400' 
-                        : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
-                    }`}
-                    placeholder="Tell me about your project..."
-                    whileFocus={{ scale: 1.02 }}
-                  ></motion.textarea>
-                </div>
-                <motion.button
-                  type="submit"
-                  className="w-full px-8 py-3 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-colors"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Send Message
-                </motion.button>
-              </form>
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      Send Message
+                      <motion.div
+                        className="w-4 h-4"
+                        whileHover={{ x: 5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        →
+                      </motion.div>
+                    </span>
+                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </motion.button>
+                </form>
+              </div>
             </motion.div>
           </div>
+          
+          {/* Call to Action */}
+          <motion.div
+            className="text-center mt-12 lg:mt-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <p className={`text-sm transition-colors duration-300 ${
+              isDarkMode ? 'text-gray-400' : 'text-gray-500'
+            }`}>
+              Prefer a quick call? <a href="tel:+251920190438" className="text-green-500 hover:text-green-400 font-medium transition-colors">+251-920-190-438</a>
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -1081,48 +1434,55 @@ function App() {
           : 'bg-white border-gray-100'
       }`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="flex flex-col sm:flex-row justify-between items-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className={`mb-4 sm:mb-0 transition-colors duration-300 ${
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className={`text-sm transition-colors duration-300 ${
               isDarkMode ? 'text-gray-400' : 'text-gray-600'
             }`}>
-              &copy; {new Date().getFullYear()} Israel Seleshi. All rights reserved.
-            </div>
-            <div className="flex space-x-4">
+              © {new Date().getFullYear()} Israel Seleshi. All rights reserved.
+            </p>
+            
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
               <motion.a 
-                href="https://www.linkedin.com/in/israel-theodros-seleshi-7125b4222/" 
-                className="text-gray-400 hover:text-[#0077b5] transition-colors"
-                whileHover={{ scale: 1.2, y: -2 }}
+                href="https://linkedin.com/in/israel-theodros-seleshi" 
                 target="_blank"
                 rel="noopener noreferrer"
+                className={`transition-colors duration-300 hover:scale-110 ${
+                  isDarkMode ? 'text-gray-400 hover:text-blue-400' : 'text-gray-600 hover:text-blue-600'
+                }`}
+                whileHover={{ scale: 1.2, y: -2 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <Linkedin size={20} />
               </motion.a>
               <motion.a 
-                href="#" 
-                className="text-gray-400 hover:text-gray-900 transition-colors"
+                href="https://github.com/israelseleshi" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`transition-colors duration-300 hover:scale-110 ${
+                  isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                }`}
                 whileHover={{ scale: 1.2, y: -2 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <Github size={20} />
               </motion.a>
               <motion.a 
                 href="mailto:israelseleshi09@gmail.com" 
-                className="text-gray-400 hover:text-red-500 transition-colors"
+                className={`transition-colors duration-300 hover:scale-110 ${
+                  isDarkMode ? 'text-gray-400 hover:text-green-400' : 'text-gray-600 hover:text-green-600'
+                }`}
                 whileHover={{ scale: 1.2, y: -2 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <Mail size={20} />
               </motion.a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </footer>
     </div>
   );
-}
+};
 
 export default App;
